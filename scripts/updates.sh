@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-BAR_ICON="UPS"
+BAR_ICON="Updates"
 NOTIFY_ICON=/usr/share/icons/Papirus/32x32/apps/system-software-update.svg
 
 get_total_updates() { UPDATES=$(checkupdates 2>/dev/null | wc -l); }
@@ -12,13 +12,13 @@ while true; do
     if hash notify-send &>/dev/null; then
         if (( UPDATES > 50 )); then
             notify-send -u critical -i $NOTIFY_ICON \
-                "You really need to update!!" "$UPDATES New packages"
+                "Critical Updates Needed" "$UPDATES New packages"
         elif (( UPDATES > 25 )); then
             notify-send -u normal -i $NOTIFY_ICON \
-                "You should update soon" "$UPDATES New packages"
+                "Updates Needed" "$UPDATES New packages"
         elif (( UPDATES > 2 )); then
             notify-send -u low -i $NOTIFY_ICON \
-                "$UPDATES New packages"
+                "Petty Updates Needed" "$UPDATES New packages"
         fi
     fi
 
